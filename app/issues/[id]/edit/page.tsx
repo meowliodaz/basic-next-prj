@@ -11,11 +11,11 @@ import IssueEditForm from "@/app/components/IssueEditForm";
 
 
 const NewIssuePage = () => {
-	const [issue, setIssue] = useState<IssueInterface>({});
+	const [issue, setIssue] = useState<IssueInterface>({} as IssueInterface);
 	const issueID = usePathname().split("issues/")[1].split("/")[0];
 
 	const getIssues = async () => {
-		const issueResponse = await axios.get(`http://localhost:3000/api/issues/${issueID}`, {})
+		const issueResponse = await axios.get(`/api/issues/${issueID}`, {})
 		setIssue(issueResponse.data)
 	}
 	useEffect(() => {getIssues()}, [])
