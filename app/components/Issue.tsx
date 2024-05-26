@@ -36,14 +36,14 @@ const Issue = ({ id, title, description, status, createdAt, updatedAt}:IssueInte
 				</div>
 			</div>
 			<div className="space-x-2">
-				<Button className="">
-					<Link
+				<Link
 						href={`/issues/${(id)}/edit`}
 						className=""
 					>
+					<Button className="">
 						Edit
-					</Link>
-				</Button>
+					</Button>
+				</Link>
 				<IssueDeleteDialog
 					id={id}
 					title={title}
