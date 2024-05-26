@@ -1,0 +1,41 @@
+"use client"
+
+import { useEffect, useState } from "react";
+import Issue from "./Issue"
+import axios from "axios";
+import { remark } from "remark";
+import html from "remark-html";
+
+import { IssueInterface } from "../IssueSchemas";
+
+
+const IssuesDisplay = () => {
+	const [issues, setIssues] = useState<IssueInterface[]>([]);
+	const getIssues = async () => {
+		const issues = await axios.get("http://localhost:3000/api/issues")
+		setIssues(issues.data)
+	}
+	useEffect(() => {getIssues()}, [])
+	
+	// issues.map((item) => {
+	// 	console.log(item)
+	// })
+
+	return (
+		<div className="space-y-4 max-w-screen-md ">
+			{issues.map((item) => (
+				<Issue 
+					key={`issue-${item.id}`}
+					id={item.id}
+					title={item.title}
+					description={item.description}
+					status={item.status}
+					createdAt={item.createdAt}
+					updatedAt={item.updatedAt}
+				/>
+			))}
+		</div>
+	)
+}
+
+export default IssuesDisplay;
