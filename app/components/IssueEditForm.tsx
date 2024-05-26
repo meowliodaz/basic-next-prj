@@ -33,8 +33,9 @@ const IssueEditForm = ({ id, title, description, status, createdAt, updatedAt}:I
 			onSubmit={handleSubmit(async (data) => {
 				try {
 					setSubmitting(true);
-					await axios.put(`/api/issues/${id}`, data);		// PUT updated issue here
-					router.refresh();								// Redirect/Refresh here
+					const response = await axios.put(`/api/issues/${id}`, data);	// PUT updated issue here
+					router.refresh();												// Redirect/Refresh here
+					setSubmitting(false);
 				} catch (error) {
 					setSubmitting(false);
 				}
