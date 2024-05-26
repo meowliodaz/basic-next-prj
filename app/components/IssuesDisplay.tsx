@@ -12,14 +12,10 @@ import { IssueInterface } from "../IssueSchemas";
 const IssuesDisplay = () => {
 	const [issues, setIssues] = useState<IssueInterface[]>([]);
 	const getIssues = async () => {
-		const issues = await axios.get("http://localhost:3000/api/issues")
-		setIssues(issues.data)
+		const response = await axios.get("http://localhost:3000/api/issues")
+		setIssues(response.data)
 	}
 	useEffect(() => {getIssues()}, [])
-	
-	// issues.map((item) => {
-	// 	console.log(item)
-	// })
 
 	return (
 		<div className="space-y-4 max-w-screen-md ">
