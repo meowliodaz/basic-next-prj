@@ -2,7 +2,7 @@ import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import { createIssueSchema } from "@/app/IssueSchemas";
+import { IssueSchema } from "@/app/IssueSchemas";
 
 // Get all issues
 export async function GET() {
@@ -13,7 +13,7 @@ export async function GET() {
 // Create new issue
 export async function POST(request: NextRequest) {
 	const body = await request.json();
-	const validate = createIssueSchema.safeParse(body);
+	const validate = IssueSchema.safeParse(body);
 	if (!validate.success)
 		return NextResponse.json(validate.error.format(), { status: 400 })
 
