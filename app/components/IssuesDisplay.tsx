@@ -12,7 +12,7 @@ import { IssueInterface } from "../IssueSchemas";
 const IssuesDisplay = () => {
 	const [issues, setIssues] = useState<IssueInterface[]>([]);
 	const getIssues = async () => {
-		const response = await axios.get("http://localhost:3000/api/issues")
+		const response = await axios.get("/api/issues")
 		setIssues(response.data)
 	}
 	useEffect(() => {getIssues()}, [])

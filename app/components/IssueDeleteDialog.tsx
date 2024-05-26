@@ -32,7 +32,7 @@ const IssueDeleteDialog = ({ id, title, description, status, createdAt, updatedA
 						<Button
 							onClick={async() => {
 								console.log("Delete")
-								const issueResponse = await axios.delete(`http://localhost:3000/api/issues/${issueID}`, {})
+								const issueResponse = await axios.delete(`/api/issues/${id}`, {})
 
 							}}
 						>

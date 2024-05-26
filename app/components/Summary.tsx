@@ -8,7 +8,7 @@ const Summary = () => {
 	const [issues, setIssues] = useState<IssueInterface[]>([]);
 
 	const getIssues = async () => {
-		const issuesResponse = await axios.get(`http://localhost:3000/api/issues`, {})
+		const issuesResponse = await axios.get(`/api/issues`, {})
 		setIssues(issuesResponse.data)
 	}
 
