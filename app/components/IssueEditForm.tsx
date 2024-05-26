@@ -12,7 +12,6 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Spinner from "@/app/components/Spinner";
 import SimpleMDE from "react-simplemde-editor";
-import * as Form from '@radix-ui/react-form';
 
 type IssueForm = z.infer<typeof IssueSchema>
 
@@ -34,11 +33,8 @@ const IssueEditForm = ({ id, title, description, status, createdAt, updatedAt}:I
 			onSubmit={handleSubmit(async (data) => {
 				try {
 					setSubmitting(true);
-					console.log("handleSubmit")
-					console.log(data)
-					// await axios.put(`/api/issues/${id}`, data);		// PUT updated issue here
+					await axios.put(`/api/issues/${id}`, data);		// PUT updated issue here
 					router.refresh();								// Redirect/Refresh here
-					setSubmitting(false);
 				} catch (error) {
 					setSubmitting(false);
 				}
@@ -59,9 +55,9 @@ const IssueEditForm = ({ id, title, description, status, createdAt, updatedAt}:I
 			</div>
 			<div>
 				{/* TODO: Set defaultValue to issue's old value */}
-				<Select.Root defaultValue="OPEN">		
+				<Select.Root defaultValue={status} {...register('status')}>		
 					<Select.Trigger className="w-28" />
-					<Select.Content >
+					<Select.Content>
 						<Select.Group>
 							<Select.Item value="OPEN">OPEN</Select.Item>
 							<Select.Item value="PROCESSING">PROCESSING</Select.Item>
