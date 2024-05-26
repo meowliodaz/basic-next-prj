@@ -45,7 +45,12 @@ const Issue = ({ id, title, description, status, createdAt, updatedAt}:IssueInte
 					</Link>
 				</Button>
 				<IssueDeleteDialog
-					issueID={id}
+					id={id}
+					title={title}
+					description={description}
+					status={status}
+					createdAt={createdAt}
+					updatedAt={updatedAt}
 				/>
 			</div>
 		</div>

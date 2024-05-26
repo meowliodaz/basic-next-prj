@@ -5,48 +5,12 @@ import React, { useEffect, useState } from 'react'
 import { IssueInterface } from '../IssueSchemas';
 import axios from 'axios';
 
-const GetIssue = async () => {
-	const [issue, setIssue] = useState<IssueInterface>({});
-	const issueID = usePathname().split("issues/")[1].split("/")[0];
 
-	const getIssues = async () => {
-		const issueResponse = await axios.get(`http://localhost:3000/api/issues/${issueID}`, {})
-		setIssue(issueResponse.data)
-	}
-	useEffect(() => {getIssues()}, [])
-}
-
-const DeleteIssue = async () => {
-	console.log("Delete")
-	const issueID = usePathname().split("issues/")[1].split("/")[0];
-
-	const getIssues = async () => {
-		const issueResponse = await axios.delete(`http://localhost:3000/api/issues/${issueID}`, {})
-	}
-	useEffect(() => {getIssues()}, [])
-}
-
-
-const IssueDeleteDialog = ({issueID}:number) => {
-	const [issue, setIssue] = useState<IssueInterface>({});
-
-	const getIssues = async () => {
-
-		const issueResponse = await axios.get(`http://localhost:3000/api/issues/${issueID}`, {})
-		setIssue(issueResponse.data)
-	}
-	useEffect(() => {getIssues()}, [])
-	
+const IssueDeleteDialog = ({ id, title, description, status, createdAt, updatedAt}:IssueInterface) => {	
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
-				<Button
-					variant="surface"
-					onClick={async() => {
-						const issueResponse = await axios.get(`http://localhost:3000/api/issues/${issueID}`, {})
-						setIssue(issueResponse.data)
-					}}
-				>
+				<Button variant="surface">
 					Delete
 				</Button>
 			</Dialog.Trigger>
@@ -55,7 +19,7 @@ const IssueDeleteDialog = ({issueID}:number) => {
 				<Dialog.Title>Deleting Issue</Dialog.Title>
 				<Dialog.Description size="3" mb="5">
 					Are you sure you want to delete issue, titled:
-					<p className='font-medium text-lg'>{issue.title}</p>
+					<p className='font-medium text-lg'>{title}</p>
 				</Dialog.Description>
 
 				<Flex gap="3" mt="4" justify="end">
@@ -71,7 +35,9 @@ const IssueDeleteDialog = ({issueID}:number) => {
 								const issueResponse = await axios.delete(`http://localhost:3000/api/issues/${issueID}`, {})
 
 							}}
-						>Save</Button>
+						>
+							Confirm
+						</Button>
 					</Dialog.Close>
 				</Flex>
 			</Dialog.Content>
