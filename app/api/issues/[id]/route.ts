@@ -37,6 +37,13 @@ export async function PUT(request: NextRequest) {
 }
 
 // Delete issue
-export async function DELETE() {
-	return NextResponse.json 
+export async function DELETE(request: NextRequest) {
+	const issueID = Number(request.url.split("issues/")[1].split("/")[0]);
+	const deletedIssue = await prisma.issues.delete({
+		where: {
+			id: issueID
+		}
+	})
+
+	return NextResponse.json(deletedIssue, { status: 200 })
 }
