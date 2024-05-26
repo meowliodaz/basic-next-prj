@@ -1,7 +1,7 @@
 "use client"
 
 import "easymde/dist/easymde.min.css";
-import { Button,  Callout,  Text,  TextField } from '@radix-ui/themes';
+import { Button, Callout, TextField } from '@radix-ui/themes';
 import SimpleMDE from "react-simplemde-editor";
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
@@ -10,7 +10,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { zodResolver} from "@hookform/resolvers/zod";
 
-import { createIssueSchema } from "@/app/ValidationSchema";
+import { createIssueSchema } from "@/app/IssueSchemas";
 import { ErrorMessage } from "@/app/components/ErrorMessages";
 import Spinner from "@/app/components/Spinner";
 
@@ -41,8 +41,8 @@ const NewIssuePage = () => {
 				onSubmit={handleSubmit(async (data) => {
 					try {
 						setSubmitting(true);
-						await axios.post("/api/issues", data);
-						router.push("/issues");
+						await axios.post("/api/issues", data);		// POST new issue here
+						router.push("/issues");						// Redirect here
 					} catch (error) {
 						setSubmitting(false);
 						setError("An unexpected error has occured!");
