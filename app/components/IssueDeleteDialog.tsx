@@ -1,12 +1,21 @@
 
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes'
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { IssueInterface } from '../IssueSchemas';
 import axios from 'axios';
 
 
-const IssueDeleteDialog = ({ id, title, description, status, createdAt, updatedAt}:IssueInterface) => {	
+const IssueDeleteDialog = ({ id, title, description, status, createdAt, updatedAt}:IssueInterface) => {
+	const router = useRouter();
+
+	const deleteIssue = async() => {
+		const issueResponse = axios.delete(`/api/issues/${id}`, {}).then().then(() => {
+			router.push("/issues");
+			router.refresh()
+		})
+	}
+
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
@@ -30,11 +39,7 @@ const IssueDeleteDialog = ({ id, title, description, status, createdAt, updatedA
 					</Dialog.Close>
 					<Dialog.Close>
 						<Button
-							onClick={async() => {
-								console.log("Delete")
-								const issueResponse = await axios.delete(`/api/issues/${id}`, {})
-
-							}}
+							onClick={deleteIssue}
 						>
 							Confirm
 						</Button>
