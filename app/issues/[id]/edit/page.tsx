@@ -19,7 +19,6 @@ const NewIssuePage = () => {
 		setIssue(issueResponse.data)
 	}
 	useEffect(() => {getIssues()}, [])
-	console.log(issue)
 	
 	return (
 		<div className="max-w-xl">
