@@ -11,9 +11,11 @@ const IssuesPage = () => {
 		<div>
 			<h1 className="text-3xl font-bold mb-5">Issues Page</h1>
 			<div>
-				<Button>
-					<Link href="/issues/new">New Issue</Link>
-				</Button>
+				<Link href="/issues/new">
+					<Button>
+						New Issue
+					</Button>
+				</Link>
 			</div>
 			<div className='mt-10'>
 				<IssuesDisplay />
