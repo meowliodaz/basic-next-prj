@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import Issue from "./Issue"
 import axios from "axios";
-import { remark } from "remark";
-import html from "remark-html";
 
 import { IssueInterface } from "../IssueSchemas";
 
